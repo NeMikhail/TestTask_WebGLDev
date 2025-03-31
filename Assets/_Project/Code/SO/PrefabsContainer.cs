@@ -1,7 +1,7 @@
 ﻿using MAEngine.Extention;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PrefabsContainer", menuName = "SO/PrefabsContainer", order = 0)]
+[CreateAssetMenu(fileName = "PrefabsContainer", menuName = "SO/Container/PrefabsContainer", order = 0)]
 public class PrefabsContainer : ScriptableObject
 {
     [SerializeField] private SerializableDictionary<PrefabID, GameObject> _prefabsDict;

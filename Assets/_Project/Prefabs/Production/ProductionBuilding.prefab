@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8930551392742631708}
   - component: {fileID: 3565528735111904603}
   - component: {fileID: 6497077153237455087}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text_ProductionAddingValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 828585160725290303}
   - component: {fileID: 350828665205051264}
   - component: {fileID: 1789576927229584827}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: P-Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 8552577001044410569}
   - component: {fileID: 1747564465647594256}
   - component: {fileID: 3251124849452840561}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: P-ProductionValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 740003496998754160}
   - component: {fileID: 2861813823532961917}
   - component: {fileID: 3364606415818926788}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BuildingModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 7798170747974011888}
   - component: {fileID: 7208425732674989657}
   - component: {fileID: 4046125710594863066}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5042676940262633330}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 3572952069333718682}
   - component: {fileID: 1576896599541078799}
   - component: {fileID: 2541246716771702360}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text_ProductionName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8663048836222751837}
   - component: {fileID: 8202148118994069374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ProductionBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5062094650049134132}
   - component: {fileID: 5418511933757670714}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Slider-Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 983617485185769091}
   - component: {fileID: 2754963738810588691}
   - component: {fileID: 3849201958146466977}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: P-ProductionAddingValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +879,7 @@ GameObject:
   - component: {fileID: 8701137199347553680}
   - component: {fileID: 8754703005163849120}
   - component: {fileID: 5573824947068688556}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: P-Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 1867016969722199607}
   - component: {fileID: 574101783607773496}
   - component: {fileID: 1313505192887704885}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: P-Production
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 1677203345833781613}
   - component: {fileID: 2134188837381590720}
   - component: {fileID: 910446577515413806}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: P-Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 6717639901296608687}
   - component: {fileID: 5654846340935361124}
   - component: {fileID: 4736580854165240213}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text_ProductionValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1245,7 +1245,7 @@ GameObject:
   - component: {fileID: 8252479722804342365}
   - component: {fileID: 7371192654663186701}
   - component: {fileID: 1116884493356388403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1346,7 +1346,7 @@ GameObject:
   - component: {fileID: 131665218563059524}
   - component: {fileID: 7945710431275191600}
   - component: {fileID: 2246368938264357771}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1421,7 +1421,7 @@ GameObject:
   - component: {fileID: 2966844017560487247}
   - component: {fileID: 6878114602750621067}
   - component: {fileID: 6791521445718734783}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Im-ProductionIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,9 +8,9 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-    [RequireComponent(typeof(CharacterController))]
+    //[RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM 
-    [RequireComponent(typeof(PlayerInput))]
+    //[RequireComponent(typeof(PlayerInput))]
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
@@ -123,7 +123,7 @@ namespace StarterAssets
         }
 
 
-        private void Awake()
+        protected virtual  void Awake()
         {
             // get a reference to our main camera
             if (_mainCamera == null)
@@ -132,7 +132,7 @@ namespace StarterAssets
             }
         }
 
-        private void Start()
+        protected virtual  void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
@@ -152,7 +152,7 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
         }
 
-        private void Update()
+        protected virtual  void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
 
@@ -161,12 +161,12 @@ namespace StarterAssets
             Move();
         }
 
-        private void LateUpdate()
+        protected virtual  void LateUpdate()
         {
             CameraRotation();
         }
 
-        private void AssignAnimationIDs()
+        protected virtual  void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
@@ -175,7 +175,7 @@ namespace StarterAssets
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
 
-        private void GroundedCheck()
+        protected virtual void GroundedCheck()
         {
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
@@ -190,7 +190,7 @@ namespace StarterAssets
             }
         }
 
-        private void CameraRotation()
+        protected virtual void CameraRotation()
         {
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
@@ -211,7 +211,7 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
-        private void Move()
+        protected virtual void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
@@ -279,7 +279,7 @@ namespace StarterAssets
             }
         }
 
-        private void JumpAndGravity()
+        protected virtual void JumpAndGravity()
         {
             if (Grounded)
             {
@@ -369,7 +369,7 @@ namespace StarterAssets
                 GroundedRadius);
         }
 
-        private void OnFootstep(AnimationEvent animationEvent)
+        protected virtual void OnFootstep(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
@@ -381,7 +381,7 @@ namespace StarterAssets
             }
         }
 
-        private void OnLand(AnimationEvent animationEvent)
+        protected virtual void OnLand(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {

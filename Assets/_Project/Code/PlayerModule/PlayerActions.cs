@@ -29,8 +29,11 @@ namespace Player
         private Vector2 _cameraMoveVector;
         private Vector3 _playerTargetPosition;
         private int _animIDSpeed;
+        private int _animIDGrounded;
+        private int _animIDMotionSpeed;
         private bool _isWalking;
         private GameObject _markerObject;
+
 
         [Inject]
         public void Construct(InputSystem_Actions inputSystemActions, PlayerView playerView, PlayerConfig config,
@@ -172,6 +175,8 @@ namespace Player
         private void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDGrounded = Animator.StringToHash("Grounded");
+            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
 
         private void AnimatePlayer()
@@ -190,8 +195,8 @@ namespace Player
         {
             if (_playerView.Animator.GetFloat(_animIDSpeed) != 0f)
             {
-                Debug.Log("Idle");
                 _playerView.Animator.SetFloat(_animIDSpeed, 0);
+                _playerView.Animator.SetFloat(_animIDMotionSpeed, 1);
             }
         }
 
@@ -200,8 +205,8 @@ namespace Player
             
             if (_playerView.Animator.GetFloat(_animIDSpeed) != 2f)
             {
-                Debug.Log("Walk");
                 _playerView.Animator.SetFloat(_animIDSpeed, 2f);
+                _playerView.Animator.SetFloat(_animIDMotionSpeed, 1);
             }
             
         }

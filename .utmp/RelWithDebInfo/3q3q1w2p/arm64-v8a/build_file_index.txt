@@ -1,0 +1,2 @@
+P:\Unity_Prj\_work\TestTask_WebGLDev\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+P:\Unity_Prj\_work\TestTask_WebGLDev\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

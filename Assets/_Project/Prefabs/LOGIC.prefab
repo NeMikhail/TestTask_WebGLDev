@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerView: {fileID: 0}
+  _playerConfig: {fileID: 11400000, guid: 56a563c5fff838e4a831e2994b79b43f, type: 2}
 --- !u!1 &6917462991267542379
 GameObject:
   m_ObjectHideFlags: 0

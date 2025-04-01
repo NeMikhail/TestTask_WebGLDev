@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+using GameCoreModule;
 using MAEngine;
-using MAEngine.Extention;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -11,6 +13,9 @@ namespace Player
     {
         private InputSystem_Actions _inputSystemActions;
         private PlayerView _playerView;
+        private PlayerConfig _config;
+        private PlayerInventory _playerInventory;
+        private PlayerEventBus _playerEventBus;
         
         private Camera _camera;
         private Transform _cameraTransform;
@@ -18,12 +23,17 @@ namespace Player
         private Vector3 _playerTargetPosition;
         private int _animIDSpeed;
         private bool _isWalking;
+        private int _uILayer;
 
         [Inject]
-        public void Construct(InputSystem_Actions inputSystemActions, PlayerView playerView)
+        public void Construct(InputSystem_Actions inputSystemActions, PlayerView playerView, PlayerConfig config,
+            PlayerInventory playerInventory, PlayerEventBus playerEventBus)
         {
             _inputSystemActions = inputSystemActions;
             _playerView = playerView;
+            _config = config;
+            _playerInventory = playerInventory;
+            _playerEventBus = playerEventBus;
         }
         
         public void Initialisation()
@@ -31,14 +41,19 @@ namespace Player
             _camera = Camera.main;
             _cameraTransform = _camera.transform;
             _inputSystemActions.Enable();
-            _inputSystemActions.Player.Attack.performed += CheckTargetPosition;
             AssignAnimationIDs();
             _playerTargetPosition = _playerView.transform.position;
+            InitializeParametrs();
+            InitializeInventory();
+            _uILayer = LayerMask.NameToLayer("UI");
+            _inputSystemActions.Player.Attack.performed += CheckTargetPosition;
+            _playerEventBus.OnGetProductItem += GetProductItem;
         }
 
         public void Cleanup()
         {
             _inputSystemActions.Player.Attack.performed -= CheckTargetPosition;
+            _playerEventBus.OnGetProductItem -= GetProductItem;
         }
         
         public void Execute(float deltaTime)
@@ -53,20 +68,77 @@ namespace Player
             AnimatePlayer();
         }
         
-        private void CheckTargetPosition(InputAction.CallbackContext obj)
+        private void InitializeParametrs()
         {
-            Vector3 targetPos = Vector3.zero;
-            
-            if (UnityEngine.Input.touchCount > 0)
+            _playerView.PlayerAgent.speed = _config.Speed;
+        }
+        
+        private void InitializeInventory()
+        {
+            _playerInventory.InitializeInventory(_config);
+        }
+        
+        private void GetProductItem(ProductID productID)
+        {
+            InventoryItem item = _playerInventory.GetItem(productID);
+            _playerEventBus.OnSendProductInventoryItem?.Invoke(item);
+        }
+        
+        public bool IsPointerOverUIElement()
+        {
+            return IsPointerOverUIElement(GetEventSystemRaycastResults());
+        }
+        
+        private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
+        {
+            for (int index = 0; index < eventSystemRaysastResults.Count; index++)
             {
-                Touch touch = UnityEngine.Input.GetTouch(0);
-                
-                targetPos =
-                    Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 5));
+                RaycastResult curRaysastResult = eventSystemRaysastResults[index];
+                if (curRaysastResult.gameObject.layer == _uILayer)
+                    return true;
+            }
+            return false;
+        }
+        
+        static List<RaycastResult> GetEventSystemRaycastResults()
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current);
+            if (Touchscreen.current != null)
+            {
+                if (Touchscreen.current.touches.Count > 0)
+                {
+                    eventData.position = Touchscreen.current.position.ReadValue();
+                }
             }
             else
             {
-                Vector3 mousePosition = Input.mousePosition;
+                eventData.position = Mouse.current.position.ReadValue();
+            }
+            List<RaycastResult> raysastResults = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, raysastResults);
+            return raysastResults;
+        }
+        
+        private void CheckTargetPosition(InputAction.CallbackContext callbackContext)
+        {
+            Vector3 targetPos = Vector3.zero;
+            if (IsPointerOverUIElement())
+            {
+                return;
+            }
+
+            if (Touchscreen.current != null)
+            {
+                if (Touchscreen.current.touches.Count > 0)
+                {
+                    Vector2 touchPosition = Touchscreen.current.position.ReadValue();
+                    targetPos =
+                        Camera.main.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, 5));
+                }
+            }
+            else
+            {
+                Vector2 mousePosition = Mouse.current.position.ReadValue();
                 targetPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 5));
             }
             RaycastHit hit;

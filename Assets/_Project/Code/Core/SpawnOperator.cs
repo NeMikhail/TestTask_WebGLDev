@@ -35,7 +35,7 @@ namespace GameCoreModule
             _eventBus.OnSpawnRotatedObject -= SpawnObject;
         }
 
-        private void SpawnObject(PrefabID prefabID, Vector3 position)
+        private void SpawnObject(PrefabID prefabID, Vector3 position, GameObjectSpawnCallback callback)
         {
             GameObject prefab = _prefabsContainer.PrefabsDict.GetValue(prefabID);
             GameObject go = _di.InstantiatePrefab(prefab);
@@ -46,10 +46,10 @@ namespace GameCoreModule
             {
                 _sceneViewsContainer.AddView(view);
             }
-            _eventBus.OnObjectSpawned?.Invoke(go);
+            callback.SetObject(go);
         }
 
-        private void SpawnObject(PrefabID prefabID, Vector3 position, Transform root)
+        private void SpawnObject(PrefabID prefabID, Vector3 position, Transform root, GameObjectSpawnCallback callback)
         {
             GameObject prefab = _prefabsContainer.PrefabsDict.GetValue(prefabID);
             GameObject go = _di.InstantiatePrefab(prefab, position, Quaternion.identity, root);
@@ -59,10 +59,11 @@ namespace GameCoreModule
             {
                 _sceneViewsContainer.AddView(view);
             }
-            _eventBus.OnObjectSpawned?.Invoke(go);
+            callback.SetObject(go);
         }
 
-        private void SpawnObject(PrefabID prefabID, Vector3 position, Quaternion rotation, Transform root)
+        private void SpawnObject(PrefabID prefabID, Vector3 position, Quaternion rotation, Transform root,
+            GameObjectSpawnCallback callback)
         {
             GameObject prefab = _prefabsContainer.PrefabsDict.GetValue(prefabID);
             GameObject go = _di.InstantiatePrefab(prefab, position, rotation, root);
@@ -72,7 +73,7 @@ namespace GameCoreModule
             {
                 _sceneViewsContainer.AddView(view);
             }
-            _eventBus.OnObjectSpawned?.Invoke(go);
+            callback.SetObject(go);
         }
     }
 }

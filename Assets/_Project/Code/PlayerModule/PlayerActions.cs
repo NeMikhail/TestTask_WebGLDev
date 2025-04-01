@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameCoreModule;
 using MAEngine;
@@ -16,6 +17,8 @@ namespace Player
         private PlayerConfig _config;
         private PlayerInventory _playerInventory;
         private PlayerEventBus _playerEventBus;
+        private GameEventBus _gameEventBus;
+        private UIEventBus _uiEventBus;
         
         private Camera _camera;
         private Transform _cameraTransform;
@@ -24,16 +27,20 @@ namespace Player
         private int _animIDSpeed;
         private bool _isWalking;
         private int _uILayer;
+        private GameObject _markerObject;
 
         [Inject]
         public void Construct(InputSystem_Actions inputSystemActions, PlayerView playerView, PlayerConfig config,
-            PlayerInventory playerInventory, PlayerEventBus playerEventBus)
+            PlayerInventory playerInventory,
+            PlayerEventBus playerEventBus, GameEventBus gameEventBus, UIEventBus uiEventBus)
         {
             _inputSystemActions = inputSystemActions;
             _playerView = playerView;
             _config = config;
             _playerInventory = playerInventory;
             _playerEventBus = playerEventBus;
+            _gameEventBus = gameEventBus;
+            _uiEventBus = uiEventBus;
         }
         
         public void Initialisation()
@@ -78,51 +85,18 @@ namespace Player
             _playerInventory.InitializeInventory(_config);
         }
         
-        private void GetProductItem(ProductID productID)
+        private void GetProductItem(ProductID productID, InventoryItemCallback callback)
         {
             InventoryItem item = _playerInventory.GetItem(productID);
-            _playerEventBus.OnSendProductInventoryItem?.Invoke(item);
-        }
-        
-        public bool IsPointerOverUIElement()
-        {
-            return IsPointerOverUIElement(GetEventSystemRaycastResults());
-        }
-        
-        private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
-        {
-            for (int index = 0; index < eventSystemRaysastResults.Count; index++)
-            {
-                RaycastResult curRaysastResult = eventSystemRaysastResults[index];
-                if (curRaysastResult.gameObject.layer == _uILayer)
-                    return true;
-            }
-            return false;
-        }
-        
-        static List<RaycastResult> GetEventSystemRaycastResults()
-        {
-            PointerEventData eventData = new PointerEventData(EventSystem.current);
-            if (Touchscreen.current != null)
-            {
-                if (Touchscreen.current.touches.Count > 0)
-                {
-                    eventData.position = Touchscreen.current.position.ReadValue();
-                }
-            }
-            else
-            {
-                eventData.position = Mouse.current.position.ReadValue();
-            }
-            List<RaycastResult> raysastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, raysastResults);
-            return raysastResults;
+            callback.SetInventoryItem(item);
         }
         
         private void CheckTargetPosition(InputAction.CallbackContext callbackContext)
         {
             Vector3 targetPos = Vector3.zero;
-            if (IsPointerOverUIElement())
+            PointerCheckEventCallback callback = new PointerCheckEventCallback();
+            _uiEventBus.OnPointerCheck?.Invoke(callback);
+            if (callback.IsPointerOverUI)
             {
                 return;
             }
@@ -147,16 +121,40 @@ namespace Player
             if (Physics.Raycast(_cameraTransform.position, direction, out hit, Mathf.Infinity, layerMask))
 
             { 
-                direction = (hit.point - _playerView.gameObject.transform.position).normalized;
-                _playerTargetPosition = hit.point;
-                _isWalking = true;
+                ChangeTargetPosition(hit);
             }
             else
             { 
                 return;
             }
         }
-        
+
+        private void ChangeTargetPosition(RaycastHit hit)
+        {
+            Vector3 direction;
+            direction = (hit.point - _playerView.gameObject.transform.position).normalized;
+            _playerTargetPosition = hit.point;
+            _isWalking = true;
+            if (_markerObject == null)
+            {
+                GameObjectSpawnCallback callback = new GameObjectSpawnCallback();
+                _gameEventBus.OnSpawnObject?.Invoke(PrefabID.TargetPosPerfab, _playerTargetPosition,
+                    _playerView.gameObject.transform.parent, callback);
+                SetupSpawndMarker(callback.SpawnedObject);
+            }
+            else
+            {
+                _markerObject.SetActive(true);
+                _markerObject.transform.position = _playerTargetPosition;
+            }
+        }
+
+        private void SetupSpawndMarker(GameObject markerObject)
+        {
+            _markerObject = markerObject;
+        }
+
+
         private void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
@@ -201,6 +199,10 @@ namespace Player
             {
                 _isWalking = false;
                 PlayIdleAnimation();
+                if (_markerObject != null)
+                {
+                    _markerObject.SetActive(false);
+                }
             }
         }
 

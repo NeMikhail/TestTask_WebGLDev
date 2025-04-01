@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2002954836588725940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4932934958743536293}
+  - component: {fileID: 5218240948179760609}
+  - component: {fileID: 6542606172351424176}
+  m_Layer: 0
+  m_Name: UIModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4932934958743536293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002954836588725940}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2403990988901911099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5218240948179760609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002954836588725940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d78169493ab4c06b4e032a0f0ca069c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 0}
+--- !u!114 &6542606172351424176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002954836588725940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d5bba084404e61816343c607bfa860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6660781269493600865
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +345,7 @@ Transform:
   - {fileID: 2032890825828232349}
   - {fileID: 8500588067213415899}
   - {fileID: 8960673454106348076}
+  - {fileID: 4932934958743536293}
   m_Father: {fileID: 1296661345172605230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6557939595012684277
@@ -305,6 +364,7 @@ MonoBehaviour:
   - {fileID: 287319341990119181}
   - {fileID: 2236781574963788298}
   - {fileID: 5102395902337332840}
+  - {fileID: 6542606172351424176}
 --- !u!114 &4009270998199165606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +382,7 @@ MonoBehaviour:
   - {fileID: 6153537473388471440}
   - {fileID: 649438275386746898}
   - {fileID: 4027003279557771167}
+  - {fileID: 5218240948179760609}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: PrefabsContainer
   m_EditorClassIdentifier: 
   _prefabsDict:
-    Dictionary: []
+    Dictionary:
+    - Key: 1
+      Value: {fileID: 77708282213502355, guid: 59920ea0653d20c49bd7c0c29c712d4e, type: 3}
+    - Key: 2
+      Value: {fileID: 4085932540395232551, guid: efef1cb3f6dfea84a87e12c73721e75f, type: 3}

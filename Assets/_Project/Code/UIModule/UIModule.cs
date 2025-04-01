@@ -10,6 +10,7 @@ namespace UI
 
             InitializeUIActions();
             InitializeGUIActions();
+            InitializePauseActions();
         }
 
         private void InitializeUIActions()
@@ -24,6 +25,13 @@ namespace UI
             GUIActions guiActions =
                 _di.Resolve<GUIActions>();
             _actions.Add(guiActions);
+        }
+        
+        private void InitializePauseActions()
+        {
+            PauseActions pauseActions =
+                _di.Resolve<PauseActions>();
+            _actions.Add(pauseActions);
         }
     }
 }

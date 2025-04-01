@@ -16,7 +16,6 @@ namespace GameCoreModule
         private Action<PrefabID, Vector3, Quaternion, Transform, GameObjectSpawnCallback> _onSpawnRotatedObject;
 
         private Action<GameState> _onStateChanged;
-        private Action _onContinueGame;
         private Action _onGameOver;
 
         public Action<PrefabID> OnCreatePool 
@@ -33,8 +32,6 @@ namespace GameCoreModule
         { get => _onSpawnRotatedObject; set => _onSpawnRotatedObject = value; }
         public Action<GameState> OnStateChanged 
         { get => _onStateChanged; set => _onStateChanged = value; }
-        public Action OnContinueGame 
-        { get => _onContinueGame; set => _onContinueGame = value; }
         public Action OnGameOver 
         { get => _onGameOver; set => _onGameOver = value; }
     }

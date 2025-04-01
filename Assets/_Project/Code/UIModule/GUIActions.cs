@@ -16,24 +16,27 @@ namespace UI
         private StateEventsBus _stateEventsBus;
         private PlayerEventBus _playerEventBus;
         private GameEventBus _gameEventBus;
+        private UIEventBus _uiEventBus;
 
         private bool _isInventoryShowed;
         private PlayerInventory _inventory;
 
         [Inject]
         public void Construct(GUIView guiView, StateEventsBus stateEventsBus, PlayerEventBus playerEventBus,
-            GameEventBus gameEventBus)
+            GameEventBus gameEventBus, UIEventBus uiEventBus)
         {
             _guiView = guiView;
             _stateEventsBus = stateEventsBus;
             _playerEventBus = playerEventBus;
             _gameEventBus = gameEventBus;
+            _uiEventBus = uiEventBus;
         }
         
         public void PreInitialisation()
         {
             _guiView.InitializeView();
             _playerEventBus.OnPlayerInventoryInitialized += ShowPlayerInventory;
+            _uiEventBus.OnShowCollectPopup += ShowCollectPopup;
         }
 
         public void Initialisation()
@@ -46,6 +49,7 @@ namespace UI
         public void Cleanup()
         {
             _playerEventBus.OnPlayerInventoryInitialized -= ShowPlayerInventory;
+            _uiEventBus.OnShowCollectPopup -= ShowCollectPopup;
             _guiView.PauseButton.Button.onClick.RemoveListener(SetPauseState);
             _guiView.InventoryResizeButton.Button.onClick.RemoveListener(ResizeInventory);
         }
@@ -53,6 +57,13 @@ namespace UI
         public void FixedExecute(float fixedDeltaTime)
         {
             UpdateUI();
+        }
+        
+        private void ShowCollectPopup(string collectableName, Sprite collectableSprite, int value)
+        {
+            _guiView.PopupView.gameObject.SetActive(true);
+            _guiView.PopupView.InfoText.text = $"You collected {collectableName}!\\n Value: {value}";
+            _guiView.PopupView.ItemImage.sprite = collectableSprite;
         }
         
         private void ShowPlayerInventory(PlayerInventory inventory)
@@ -92,6 +103,7 @@ namespace UI
         
         private void SetPauseState()
         {
+            _guiView.PopupView.gameObject.SetActive(false);
             _stateEventsBus.OnPauseStateActivate?.Invoke();
         }
         

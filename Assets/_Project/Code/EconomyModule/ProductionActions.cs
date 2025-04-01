@@ -38,6 +38,23 @@ namespace Economy
             SetupActiveProductions();
             SetupProductionUI();
         }
+        
+        public void Cleanup()
+        {
+            _playerEventBus.OnTryInteractWithObject -= TryInteractWithProductionBuilding;
+        }
+
+        public void FixedExecute(float fixedDeltaTime)
+        {
+            foreach (ActiveProduction production in _activeProductions)
+            {
+                if (production.ProductionTimer.Wait())
+                {
+                    production.AddProduction();
+                }
+                UpdeateUI(production);
+            }
+        }
 
         private void TryInteractWithProductionBuilding(GameObject buildingObj)
         {
@@ -72,7 +89,10 @@ namespace Economy
                     int remainder = item.AddValue(addedValue);
                     interactableProduction.SetProduction(remainder);
                     addedValue -= remainder;
-                    _uiEventBus.OnShowCollectPopup?.Invoke(item.ItemName, item.ItemSprite, addedValue);
+                    if (addedValue > 0)
+                    {
+                        _uiEventBus.OnShowCollectPopup?.Invoke(item.ItemName, item.ItemSprite, addedValue);
+                    }
                 }
             }
         }
@@ -104,23 +124,6 @@ namespace Economy
                     _productionBuildingsPool.ProductionBuildings[view.ProductionBuildingID];
                 ActiveProduction production = new ActiveProduction(view, config);
                 _activeProductions.Add(production);
-            }
-        }
-
-        public void Cleanup()
-        {
-            
-        }
-
-        public void FixedExecute(float fixedDeltaTime)
-        {
-            foreach (ActiveProduction production in _activeProductions)
-            {
-                if (production.ProductionTimer.Wait())
-                {
-                    production.AddProduction();
-                }
-                UpdeateUI(production);
             }
         }
 

@@ -8,23 +8,29 @@ namespace GameCoreModule
     public class GameStateActions : IAction, IInitialisation, ICleanUp
     {
         private GameEventBus _gameEventBus;
+        private StateEventsBus _stateEventsBus;
+        
         private GameState _currentGameState;
 
         [Inject]
-        public void Construct(GameEventBus gameEventBus)
+        public void Construct(GameEventBus gameEventBus, StateEventsBus stateEventsBus)
         {
             _gameEventBus = gameEventBus;
+            _stateEventsBus = stateEventsBus;
         }
 
         public void Initialisation()
         {
-            _gameEventBus.OnContinueGame += SetPlayingState;
+            _stateEventsBus.OnPlayStateActivate += SetPlayingState;
+            _stateEventsBus.OnPauseStateActivate += SetPauseState;
             SetPlayingState();
         }
 
         public void Cleanup()
         {
-            _gameEventBus.OnContinueGame -= SetPlayingState;
+            _stateEventsBus.OnPlayStateActivate -= SetPlayingState;
+            _stateEventsBus.OnPauseStateActivate -= SetPauseState;
+            
         }
 
         private void SetPlayingState()
@@ -38,7 +44,6 @@ namespace GameCoreModule
         }
         private void SetPauseState()
         {
-            Debug.Log("Paused");
             if (_currentGameState != GameState.PauseState)
             {
                 Time.timeScale = 0f;

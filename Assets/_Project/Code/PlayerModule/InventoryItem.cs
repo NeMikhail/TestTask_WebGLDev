@@ -22,15 +22,18 @@ namespace Player
             _itemMaxValue = itemMaxValueMax;
         }
 
-        public void AddValue(int value)
+        public int AddValue(int value)
         {
-            if (_itemValue + value > _itemMaxValue)
+            int valueAfterAdding = _itemValue + value;
+            if (valueAfterAdding > _itemMaxValue)
             {
                 _itemValue = _itemMaxValue;
+                return valueAfterAdding - _itemMaxValue;
             }
             else
             {
                 _itemValue += value;
+                return 0;
             }
         }
 

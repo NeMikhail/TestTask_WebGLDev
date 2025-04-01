@@ -656,6 +656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8663048836222751837}
   - component: {fileID: 8202148118994069374}
+  - component: {fileID: 6940854346775095331}
   m_Layer: 7
   m_Name: ProductionBuilding
   m_TagString: Untagged
@@ -702,7 +703,20 @@ MonoBehaviour:
   _progressSlider: {fileID: 5418511933757670714}
   _productionAddingPanel: {fileID: 3911346765918679240}
   _productionAddingValueText: {fileID: 6497077153237455087}
-  _buildingScene3DActor: {fileID: 8968527602378106421}
+  _interactableView: {fileID: 6940854346775095331}
+--- !u!114 &6940854346775095331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752917760985805442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b22e8d80fb4ee697b58ccc5bb9a2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scene3DActor: {fileID: 8968527602378106421}
 --- !u!1 &2268092182222624542
 GameObject:
   m_ObjectHideFlags: 0

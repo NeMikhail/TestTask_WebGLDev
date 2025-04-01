@@ -12,6 +12,9 @@ namespace Player
 {
     public class PlayerActions : IAction, IInitialisation, ICleanUp, IFixedExecute, IExecute
     {
+        private const string FLOOR_LAYER_NAME = "Floor";
+        private const string INTERACTABLE_LAYER_NAME = "InteractableObject";
+        
         private InputSystem_Actions _inputSystemActions;
         private PlayerView _playerView;
         private PlayerConfig _config;
@@ -26,7 +29,6 @@ namespace Player
         private Vector3 _playerTargetPosition;
         private int _animIDSpeed;
         private bool _isWalking;
-        private int _uILayer;
         private GameObject _markerObject;
 
         [Inject]
@@ -52,7 +54,6 @@ namespace Player
             _playerTargetPosition = _playerView.transform.position;
             InitializeParametrs();
             InitializeInventory();
-            _uILayer = LayerMask.NameToLayer("UI");
             _inputSystemActions.Player.Attack.performed += CheckTargetPosition;
             _playerEventBus.OnGetProductItem += GetProductItem;
         }
@@ -117,12 +118,20 @@ namespace Player
                 targetPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 5));
             }
             RaycastHit hit;
-            LayerMask layerMask = LayerMask.GetMask("Floor", "InteractableObject");
+            LayerMask layerMask = LayerMask.GetMask(FLOOR_LAYER_NAME, INTERACTABLE_LAYER_NAME);
             Vector3 direction = (targetPos - _cameraTransform.position).normalized;
-            if (Physics.Raycast(_cameraTransform.position, direction, out hit, Mathf.Infinity, layerMask))
-
-            { 
-                ChangeTargetPosition(hit);
+            if (Physics.Raycast(_cameraTransform.position, direction, out hit, Mathf.Infinity,
+                    layerMask))
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                if (hitObject.layer == LayerMask.NameToLayer(FLOOR_LAYER_NAME))
+                {
+                    ChangeTargetPosition(hit);
+                }
+                else
+                {
+                    _playerEventBus.OnTryInteractWithObject?.Invoke(hitObject);
+                }
             }
             else
             { 

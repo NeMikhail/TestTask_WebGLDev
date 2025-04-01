@@ -20,6 +20,10 @@ namespace Economy
         public int ProductionValue => _productionValue;
         public Timer ProductionAddingIndicationTimer => _productionAddingIndicationTimer;
 
+        public ActiveProduction()
+        {
+
+        }
         public ActiveProduction(ProductionBuildingView view, ProductionBuildingConfig config, int savedValue = 0)
         {
             _productionBuildingView = view;
@@ -47,6 +51,13 @@ namespace Economy
             _productionAddingIndicationTimer = new Timer(addingIndicationTime);
             UpdateUI();
         }
+        
+        public void SetProduction(int value)
+        {
+            _productionValue = value;
+            UpdateUI();
+        }
+        
 
         private void UpdateUI()
         {

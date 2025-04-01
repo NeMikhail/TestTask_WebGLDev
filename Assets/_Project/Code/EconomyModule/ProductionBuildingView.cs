@@ -1,7 +1,9 @@
 using System;
 using MAEngine;
+using Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Economy
@@ -17,7 +19,7 @@ namespace Economy
         [SerializeField] private Slider _progressSlider;
         [SerializeField] private GameObject _productionAddingPanel;
         [SerializeField] private TMP_Text _productionAddingValueText;
-        [SerializeField] private Scene3DActor _buildingScene3DActor;
+        [SerializeField] private InteractableObjectView _interactableView;
 
         public ProductionBuildingID ProductionBuildingID => _productionBuildingID;
         public Tiers ProductionTier => _productionTier;
@@ -28,7 +30,7 @@ namespace Economy
         public Slider ProgressSlider => _progressSlider;
         public GameObject ProductionAddingPanel => _productionAddingPanel;
         public TMP_Text ProductionAddingValueText => _productionAddingValueText;
-        public Scene3DActor BuildingScene3DActor => _buildingScene3DActor;
+        public InteractableObjectView InteractableView => _interactableView;
     }
 }
 

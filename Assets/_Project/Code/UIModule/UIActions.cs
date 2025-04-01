@@ -67,6 +67,9 @@ namespace UI
             {
                 eventData.position = Mouse.current.position.ReadValue();
             }
+#if PLATFORM_WEBGL
+            eventData.position = Mouse.current.position.ReadValue();
+#endif
             List<RaycastResult> raysastResults = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, raysastResults);
             return raysastResults;

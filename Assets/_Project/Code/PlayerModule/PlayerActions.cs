@@ -123,6 +123,10 @@ namespace Player
                 Vector2 mousePosition = Mouse.current.position.ReadValue();
                 targetPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 5));
             }
+#if PLATFORM_WEBGL
+            Vector2 pointerPosition = Mouse.current.position.ReadValue();
+            targetPos = Camera.main.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, 5));
+#endif
             RaycastHit hit;
             LayerMask layerMask = LayerMask.GetMask(FLOOR_LAYER_NAME, INTERACTABLE_LAYER_NAME);
             Vector3 direction = (targetPos - _cameraTransform.position).normalized;

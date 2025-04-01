@@ -96,6 +96,10 @@ PrefabInstance:
       value: 0.3301887
       objectReference: {fileID: 0}
     - target: {fileID: 2361708617166617603, guid: 493032ff5f588dc42b1fc56122026553, type: 3}
+      propertyPath: _hasSound
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2361708617166617603, guid: 493032ff5f588dc42b1fc56122026553, type: 3}
       propertyPath: _buttonImage
       value: 
       objectReference: {fileID: 7114468488104179210}

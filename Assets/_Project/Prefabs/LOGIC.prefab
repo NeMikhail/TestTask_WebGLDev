@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1749274938332492767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4995832566713325905}
+  - component: {fileID: 3841389013565228105}
+  - component: {fileID: 7928965918270015743}
+  m_Layer: 0
+  m_Name: AudioModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4995832566713325905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749274938332492767}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2403990988901911099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3841389013565228105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749274938332492767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad216648cd7243ad9de4bad66a6a57b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7928965918270015743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749274938332492767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe7e7ab9f94497c938ba66e2b211f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourceView: {fileID: 0}
 --- !u!1 &2002954836588725940
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 0}
+  _pauseUIView: {fileID: 0}
 --- !u!114 &6542606172351424176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseCanvas: {fileID: 0}
+  _guiCanvas: {fileID: 0}
 --- !u!114 &7507863818265270182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +406,7 @@ Transform:
   - {fileID: 8500588067213415899}
   - {fileID: 8960673454106348076}
   - {fileID: 4932934958743536293}
+  - {fileID: 4995832566713325905}
   m_Father: {fileID: 1296661345172605230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6557939595012684277
@@ -365,6 +426,7 @@ MonoBehaviour:
   - {fileID: 2236781574963788298}
   - {fileID: 5102395902337332840}
   - {fileID: 6542606172351424176}
+  - {fileID: 3841389013565228105}
 --- !u!114 &4009270998199165606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +445,7 @@ MonoBehaviour:
   - {fileID: 649438275386746898}
   - {fileID: 4027003279557771167}
   - {fileID: 5218240948179760609}
+  - {fileID: 7928965918270015743}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

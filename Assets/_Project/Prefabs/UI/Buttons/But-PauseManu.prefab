@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300024, guid: 56d84991286850f428b4e7df0cca7380, type: 3}
+    - target: {fileID: 2361708617166617603, guid: 493032ff5f588dc42b1fc56122026553, type: 3}
+      propertyPath: _hasSound
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3653180196027059661, guid: 493032ff5f588dc42b1fc56122026553, type: 3}
       propertyPath: m_Name
       value: But-PauseManu

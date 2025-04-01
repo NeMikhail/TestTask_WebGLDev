@@ -22,6 +22,7 @@ namespace Player
         private PlayerEventBus _playerEventBus;
         private GameEventBus _gameEventBus;
         private UIEventBus _uiEventBus;
+        private AudioEventBus _audioEventBus;
         
         private Camera _camera;
         private Transform _cameraTransform;
@@ -34,7 +35,8 @@ namespace Player
         [Inject]
         public void Construct(InputSystem_Actions inputSystemActions, PlayerView playerView, PlayerConfig config,
             PlayerInventory playerInventory,
-            PlayerEventBus playerEventBus, GameEventBus gameEventBus, UIEventBus uiEventBus)
+            PlayerEventBus playerEventBus, GameEventBus gameEventBus,
+            UIEventBus uiEventBus, AudioEventBus audioEventBus)
         {
             _inputSystemActions = inputSystemActions;
             _playerView = playerView;
@@ -43,6 +45,7 @@ namespace Player
             _playerEventBus = playerEventBus;
             _gameEventBus = gameEventBus;
             _uiEventBus = uiEventBus;
+            _audioEventBus = audioEventBus;
         }
         
         public void Initialisation()
@@ -157,6 +160,7 @@ namespace Player
                 _markerObject.SetActive(true);
                 _markerObject.transform.position = _playerTargetPosition;
             }
+            _audioEventBus.OnPlaySound?.Invoke(SoundID.SoundClick1);
         }
 
         private void SetupSpawndMarker(GameObject markerObject)

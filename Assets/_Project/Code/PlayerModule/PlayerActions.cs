@@ -83,6 +83,7 @@ namespace Player
         private void InitializeInventory()
         {
             _playerInventory.InitializeInventory(_config);
+            _playerEventBus.OnPlayerInventoryInitialized(_playerInventory);
         }
         
         private void GetProductItem(ProductID productID, InventoryItemCallback callback)
